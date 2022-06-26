@@ -1,0 +1,76 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Testing Heroku deploy",
+        "description": "Just testing Heroku deploy with docker containers",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/breweries": {
+            "get": {
+                "tags": ["Breweries"],
+                "summary": "Searches breweries by city",
+                "description": "Returns breweries that match informed city",
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City to search for breweries",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Brewery"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed to retrieve data"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Brewery": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "brewery_type": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "website_url": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
